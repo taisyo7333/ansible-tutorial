@@ -5,6 +5,7 @@
     - name: /etc/passwd からユーザー名を抜き出し
       command: cut --delimiter=':' --fields=1 /etc/passwd
       register: usernames_result
+      changed_when: false
 
     - name: usernames_result をデバッグ出力
       debug:
@@ -19,3 +20,9 @@
         msg: このマシンにはvagrantユーザーが存在します
       when:
         "'vagrant' in username_list"
+
+    - name: 全てのユーザーが実在するか確認
+      user:
+        name: "{{ item }}"
+        createhome: false
+      with_items: "{{ username_list }}"
