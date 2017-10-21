@@ -1,2 +1,20 @@
 ---
 # tasks file for nginx
+- name: Install libselinux-python and EPEL
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libselinux-python
+    - epel-release
+
+- name: Install nginx
+  yum:
+    name: nginx
+    state: present
+
+- name: start and register automated to start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
