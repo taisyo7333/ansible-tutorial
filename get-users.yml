@@ -9,3 +9,13 @@
     - name: usernames_result をデバッグ出力
       debug:
         var: usernames_result
+
+    - name: コマンド実行結果から存在するユーザー名のリストを生成
+      set_fact:
+        username_list: "{{ usernames_result.stdout_lines }}"
+
+    - name: vagrantユーザーが存在する場合にメッセージを表示
+      debug:
+        msg: このマシンにはvagrantユーザーが存在します
+      when:
+        "'vagrant' in username_list"
