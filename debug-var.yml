@@ -1,0 +1,9 @@
+---
+- name: 変数の挙動確認
+  hosts: localhost
+  vars:
+    my_var: hogehoge
+  tasks:
+    - name: デバッグ出力確認:my_var
+      debug:
+        msg: "the value of my_var is {{ my_var }} ."
