@@ -1,2 +1,2 @@
 ---
-php_fpm_config_dif: /etc/php-fpm.d
+php_fpm_config_dir: /etc/php-fpm.d
