@@ -23,6 +23,9 @@
         - mariadb
 
     - name: php-fpm
+      vars:
+        php_fpm_additional_package:
+          - php-mysqlnd
       tags:
         - php-fpm
 
