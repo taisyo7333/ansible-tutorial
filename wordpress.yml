@@ -1,4 +1,18 @@
 ---
+- name: pipelining対応用play
+  hosts: all
+  become: yes
+  vars:
+    ansible_ssh_pipelining: no
+  tasks:
+    - name: ansible_userに対するrequiretty設置を無効化
+      lineinfile:
+        dest: /etc/sudoers
+        regexp: '^Defaults:{{ ansible_user }}\srequiretty'
+        line: 'Defaults:{{ ansible_user }} requiretty '
+        validate: 'visudo -cd %s'
+        backup: yes
+
 - name: CentOS7上にWordPressをセットアップする
   hosts: all
   become: true
